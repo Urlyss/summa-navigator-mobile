@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "Summa Navigator",
+    "slug": "summa-navigator-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "summanavigator",
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "com.summa.navigator.mobile",
+      "predictiveBackGestureEnabled": true
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
