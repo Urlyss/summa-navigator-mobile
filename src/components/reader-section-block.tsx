@@ -12,10 +12,13 @@ export function ReaderSectionBlock({ title, paragraphs }: ReaderSectionBlockProp
   const { colors } = useAppTheme();
 
   return (
-    <View style={styles.block}>
-      <Text selectable style={[styles.title, { color: colors.accentStrong }]}>
-        {title}
-      </Text>
+    <View style={[styles.block, { borderColor: colors.borderSoft }]}>
+      <View style={styles.headingRow}>
+        <View style={[styles.rule, { backgroundColor: colors.gold }]} />
+        <Text selectable style={[styles.title, { color: colors.accentStrong }]}>
+          {title}
+        </Text>
+      </View>
       {paragraphs.map((paragraph, index) => (
         <Text key={`${title}-${index}`} selectable style={[styles.paragraph, { color: colors.ink }]}>
           {paragraph}
@@ -27,14 +30,27 @@ export function ReaderSectionBlock({ title, paragraphs }: ReaderSectionBlockProp
 
 const styles = StyleSheet.create({
   block: {
+    borderLeftWidth: 1,
+    gap: spacing.md,
+    paddingLeft: spacing.lg,
+  },
+  headingRow: {
+    alignItems: "center",
+    flexDirection: "row",
     gap: spacing.sm,
   },
+  rule: {
+    borderRadius: 999,
+    height: 3,
+    width: 28,
+  },
   title: {
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: "700",
+    lineHeight: 24,
   },
   paragraph: {
-    fontSize: 16,
-    lineHeight: 27,
+    fontSize: 17,
+    lineHeight: 31,
   },
 });

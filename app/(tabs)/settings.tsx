@@ -23,6 +23,12 @@ export default function SettingsScreen() {
 
   return (
     <PageShell>
+      <SectionCard eyebrow="Atmosphere" title="Reading preferences">
+        <Text selectable style={[styles.lead, { color: colors.inkSoft }]}>
+          Keep the interface quiet, legible, and tuned for longer study sessions.
+        </Text>
+      </SectionCard>
+
       <SectionCard eyebrow="Appearance" title="Theme">
         <View style={styles.row}>
           <View style={styles.copy}>
@@ -78,11 +84,15 @@ const styles = StyleSheet.create({
   },
   body: {
     fontSize: 15,
-    lineHeight: 22,
+    lineHeight: 24,
   },
   caption: {
     fontSize: 13,
     lineHeight: 20,
+  },
+  lead: {
+    fontSize: 15,
+    lineHeight: 24,
   },
   button: {
     alignSelf: "flex-start",

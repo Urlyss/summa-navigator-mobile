@@ -1,6 +1,6 @@
 import React from "react";
 import { router } from "expo-router";
-import { RefreshControl, Text, View } from "react-native";
+import { RefreshControl, StyleSheet, Text, View } from "react-native";
 import { HeroBanner } from "@/components/hero-banner";
 import { LinkRow } from "@/components/link-row";
 import { PageShell } from "@/components/page-shell";
@@ -8,10 +8,13 @@ import { SectionCard } from "@/components/section-card";
 import { StatePanel } from "@/components/state-panel";
 import { useParts } from "@/hooks/use-content";
 import { useLibrary } from "@/providers/library-provider";
+import { useAppTheme } from "@/providers/theme-provider";
+import { spacing } from "@/styles/theme";
 
 export default function HomeScreen() {
   const partsQuery = useParts();
   const { recents, bookmarks } = useLibrary();
+  const { colors } = useAppTheme();
 
   return (
     <PageShell
@@ -29,12 +32,24 @@ export default function HomeScreen() {
         onSecondaryPress={() => router.push("/search")}
       />
 
-      <SectionCard
-        eyebrow="Discover"
-        title="Parts of the Summa Theologica"
-      >
+      <View style={styles.metricsRow}>
+        <View style={[styles.metricCard, { backgroundColor: colors.cardMuted, borderColor: colors.borderSoft }]}>
+          <Text selectable style={[styles.metricValue, { color: colors.ink }]}>{partsQuery.data?.length ?? "--"}</Text>
+          <Text selectable style={[styles.metricLabel, { color: colors.inkSoft }]}>Parts loaded</Text>
+        </View>
+        <View style={[styles.metricCard, { backgroundColor: colors.cardMuted, borderColor: colors.borderSoft }]}>
+          <Text selectable style={[styles.metricValue, { color: colors.ink }]}>{bookmarks.length}</Text>
+          <Text selectable style={[styles.metricLabel, { color: colors.inkSoft }]}>Saved passages</Text>
+        </View>
+        <View style={[styles.metricCard, { backgroundColor: colors.cardMuted, borderColor: colors.borderSoft }]}>
+          <Text selectable style={[styles.metricValue, { color: colors.ink }]}>{recents.length ? "1" : "0"}</Text>
+          <Text selectable style={[styles.metricLabel, { color: colors.inkSoft }]}>Recent return</Text>
+        </View>
+      </View>
+
+      <SectionCard eyebrow="Discover" title="Parts of the Summa Theologica">
         {partsQuery.isLoading ? (
-          <Text>Loading the canon...</Text>
+          <Text selectable style={[styles.loadingText, { color: colors.inkSoft }]}>Loading the canon...</Text>
         ) : partsQuery.error ? (
           <StatePanel
             tone="error"
@@ -44,7 +59,7 @@ export default function HomeScreen() {
             onAction={() => partsQuery.refetch()}
           />
         ) : (
-          <View style={{ gap: 12 }}>
+          <View style={styles.stack}>
             {partsQuery.data?.map((part) => (
               <LinkRow
                 key={part.original_id}
@@ -60,7 +75,7 @@ export default function HomeScreen() {
 
       <SectionCard eyebrow="Reader Tools" title="Continue where you left off">
         {recents.length ? (
-          <View style={{ gap: 12 }}>
+          <View style={styles.stack}>
             {recents.slice(0, 3).map((entry) => (
               <LinkRow
                 key={entry.id}
@@ -82,7 +97,7 @@ export default function HomeScreen() {
 
       <SectionCard eyebrow="Saved" title="Bookmarks">
         {bookmarks.length ? (
-          <View style={{ gap: 12 }}>
+          <View style={styles.stack}>
             {bookmarks.slice(0, 3).map((entry) => (
               <LinkRow
                 key={entry.id}
@@ -104,3 +119,34 @@ export default function HomeScreen() {
     </PageShell>
   );
 }
+
+const styles = StyleSheet.create({
+  metricsRow: {
+    flexDirection: "row",
+    gap: spacing.sm,
+  },
+  metricCard: {
+    borderRadius: 22,
+    borderWidth: 1,
+    flex: 1,
+    gap: 4,
+    padding: spacing.md,
+  },
+  metricValue: {
+    fontFamily: "serif",
+    fontSize: 26,
+    fontWeight: "700",
+  },
+  metricLabel: {
+    fontSize: 12,
+    fontWeight: "600",
+    lineHeight: 17,
+  },
+  stack: {
+    gap: 12,
+  },
+  loadingText: {
+    fontSize: 15,
+    lineHeight: 22,
+  },
+});

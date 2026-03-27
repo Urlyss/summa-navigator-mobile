@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useAppTheme } from "@/providers/theme-provider";
 import { spacing } from "@/styles/theme";
-import type {ChatRequestOptions, UIMessage} from "ai";
+import type { UIMessage } from "ai";
 import Markdown from 'react-native-markdown-display';
 import { ChatActions } from "./chat-actions";
 import * as Clipboard from 'expo-clipboard';
@@ -24,6 +24,71 @@ interface IStylesNode {
   const [showReasoning, setShowReasoning] = React.useState(false);
   const [copyLabel, setCopyLabel] = React.useState("Copy");
   const isAssistant = message.role === "assistant";
+  const markdownStyle = React.useMemo(
+    () => ({
+      body: {
+        color: isAssistant ? colors.ink : "#F8FBF9",
+        fontSize: 15,
+        lineHeight: 24,
+      },
+      paragraph: {
+        color: isAssistant ? colors.ink : "#F8FBF9",
+        fontSize: 15,
+        lineHeight: 24,
+        marginTop: 0,
+        marginBottom: spacing.sm,
+      },
+      heading1: {
+        color: isAssistant ? colors.ink : "#F8FBF9",
+        fontFamily: "serif",
+        fontSize: 22,
+        lineHeight: 30,
+        marginTop: 0,
+        marginBottom: spacing.sm,
+      },
+      heading2: {
+        color: isAssistant ? colors.ink : "#F8FBF9",
+        fontFamily: "serif",
+        fontSize: 19,
+        lineHeight: 26,
+        marginTop: spacing.xs,
+        marginBottom: spacing.xs,
+      },
+      bullet_list: {
+        marginTop: 0,
+        marginBottom: spacing.sm,
+      },
+      ordered_list: {
+        marginTop: 0,
+        marginBottom: spacing.sm,
+      },
+      list_item: {
+        color: isAssistant ? colors.ink : "#F8FBF9",
+      },
+      strong: {
+        color: isAssistant ? colors.accentStrong : "#F8FBF9",
+        fontWeight: 700,
+      },
+      em: {
+        color: isAssistant ? colors.inkSoft : "#F0F4F3",
+      },
+      blockquote: {
+        borderLeftColor: isAssistant ? colors.gold : "#F6D58D",
+        borderLeftWidth: 3,
+        color: isAssistant ? colors.inkSoft : "#F0F4F3",
+        marginLeft: 0,
+        paddingLeft: spacing.sm,
+      },
+      code_inline: {
+        backgroundColor: isAssistant ? colors.secondarySurface : "rgba(255,255,255,0.12)",
+        borderRadius: 6,
+        color: isAssistant ? colors.accentStrong : "#F8FBF9",
+        paddingHorizontal: 6,
+        paddingVertical: 2,
+      },
+    }),
+    [colors, isAssistant]
+  );
 
   const rules = {
     // Override the 'textgroup' rule to wrap text in a selectable Text component
@@ -47,20 +112,27 @@ interface IStylesNode {
           styles.bubble,
           {
             alignSelf: isAssistant ? "flex-start" : "flex-end",
-            backgroundColor: isAssistant ? colors.card : colors.teal,
-            borderColor: isAssistant ? colors.border : colors.teal,
+            backgroundColor: isAssistant ? colors.cardElevated : colors.teal,
+            borderColor: isAssistant ? colors.borderSoft : colors.teal,
+            shadowColor: colors.shadow,
           },
+          isAssistant ? styles.assistantBubble : styles.userBubble,
         ]}
       >
-        <Text style={[styles.role, { color: isAssistant ? colors.accentStrong : "#F8FBF9" }]}>
-          {isAssistant ? "Thomas AI" : "You"}
-        </Text>
+        <View style={styles.metaRow}>
+          {isAssistant ? <View style={[styles.rule, { backgroundColor: colors.gold }]} /> : null}
+          <Text style={[styles.role, { color: isAssistant ? colors.accentStrong : "#F8FBF9" }]}>
+            {isAssistant ? "Thomas AI" : "You"}
+          </Text>
+        </View>
         {message.parts.map((part, i) => {
           switch (part.type) {
             case 'text':
               return (
               <Fragment key={`${message.id}-${i}`}>
-                <Markdown rules={rules} mergeStyle>{part.text}</Markdown>
+                <Markdown rules={rules} style={markdownStyle as any}>
+                  {part.text}
+                </Markdown>
                 {isAssistant && totalMsgLength>1 && msgInd > 0 && part.state=="done" &&(
                             <ChatActions onRetry={()=>{
                               regenerate()
@@ -83,13 +155,20 @@ interface IStylesNode {
                 <Pressable
                 key={`${message.id}-${i}`}
           onPress={() => setShowReasoning((current) => !current)}
-          style={({ pressed }) => [styles.reasoningCard, { borderColor: colors.border }, pressed && styles.pressed]}
+          style={({ pressed }) => [
+            styles.reasoningCard,
+            {
+              backgroundColor: colors.parchmentMuted,
+              borderColor: colors.borderSoft,
+            },
+            pressed && styles.pressed,
+          ]}
         >
           <Text style={[styles.reasoningTrigger, { color: colors.accentStrong }]}>
             {showReasoning ? "Hide reasoning" : "Show reasoning"}
           </Text>
           {showReasoning ? (
-            <Markdown rules={rules} >
+            <Markdown rules={rules} style={markdownStyle as any}>
               {part.text}
             </Markdown>
           ) : null}
@@ -111,11 +190,31 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   bubble: {
-    borderRadius: 24,
+    borderRadius: 26,
     borderWidth: 1,
     gap: spacing.xs,
     maxWidth: "92%",
-    padding: spacing.md,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.08,
+    shadowRadius: 22,
+  },
+  assistantBubble: {
+    borderTopLeftRadius: 10,
+  },
+  userBubble: {
+    borderBottomRightRadius: 10,
+  },
+  metaRow: {
+    alignItems: "center",
+    flexDirection: "row",
+    gap: spacing.xs,
+  },
+  rule: {
+    borderRadius: 999,
+    height: 3,
+    width: 18,
   },
   role: {
     fontSize: 12,
@@ -128,10 +227,9 @@ const styles = StyleSheet.create({
     lineHeight: 23,
   },
   reasoningCard: {
-    borderRadius: 20,
+    borderRadius: 18,
     borderWidth: 1,
     gap: spacing.xs,
-    maxWidth: "92%",
     padding: spacing.sm,
   },
   reasoningTrigger: {
@@ -146,11 +244,3 @@ const styles = StyleSheet.create({
     opacity: 0.82,
   },
 });
-
-const textStyles = StyleSheet.flatten([styles.body, {
-  color: "#F8FBF9",
-}]);
-
-const reasoningStyles = StyleSheet.flatten([styles.reasoningBody, {
-  color: "#F8FBF9",
-}]);

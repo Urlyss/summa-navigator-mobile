@@ -28,7 +28,8 @@ export function LinkRow({
         styles.row,
         {
           backgroundColor: colors.rowSurface,
-          borderColor: colors.border,
+          borderColor: colors.borderSoft,
+          boxShadow: `0 10px 28px ${colors.shadow}`,
         },
         pressed && styles.pressed,
       ]}
@@ -54,49 +55,65 @@ export function LinkRow({
           </Text>
         ) : null}
       </View>
-      <Text style={[styles.trailing, { color: colors.teal }]}>{trailingLabel ?? "Open"}</Text>
+      <View style={styles.trailingGroup}>
+        <Text style={[styles.trailing, { color: colors.teal }]}>{trailingLabel ?? "Open"}</Text>
+        <Text style={[styles.trailingArrow, { color: colors.accentStrong }]}>›</Text>
+      </View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   row: {
-    alignItems: "center",
-    borderRadius: 20,
+    alignItems: "flex-start",
+    borderRadius: 26,
     borderWidth: 1,
     flexDirection: "row",
     gap: spacing.md,
     justifyContent: "space-between",
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.lg,
   },
   pressed: {
-    opacity: 0.84,
+    opacity: 0.9,
+    transform: [{ scale: 0.992 }],
   },
   copy: {
     flex: 1,
-    gap: 6,
+    gap: 8,
   },
   badge: {
     alignSelf: "flex-start",
     borderRadius: 999,
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: "700",
     overflow: "hidden",
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
     paddingVertical: 4,
     textTransform: "uppercase",
   },
   title: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "700",
+    lineHeight: 22,
   },
   subtitle: {
     fontSize: 13,
-    lineHeight: 18,
+    lineHeight: 19,
+  },
+  trailingGroup: {
+    alignItems: "center",
+    flexDirection: "row",
+    gap: spacing.xs,
+    paddingTop: 2,
   },
   trailing: {
     fontSize: 13,
     fontWeight: "700",
+  },
+  trailingArrow: {
+    fontSize: 19,
+    fontWeight: "400",
+    lineHeight: 20,
   },
 });

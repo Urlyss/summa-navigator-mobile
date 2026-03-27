@@ -5,7 +5,6 @@ import { useAppTheme } from "@/providers/theme-provider";
 import { spacing } from "@/styles/theme";
 import type { ChatMode } from "@/lib/ai/chatbot";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import Feather from "@expo/vector-icons/Feather";
 
 type ChatComposerProps = {
   input: string;
@@ -34,16 +33,30 @@ export function ChatComposer({
     <View
       style={[
         styles.wrapper,
-        { backgroundColor: colors.card, borderColor: colors.border },
+        {
+          backgroundColor: colors.cardElevated,
+          borderColor: colors.borderSoft,
+          shadowColor: colors.shadow,
+        },
       ]}
     >
+      <Text selectable style={[styles.kicker, { color: colors.inkFaint }]}>
+        Compose a response
+      </Text>
       <TextInput
-      editable={!isLoading}
+        editable={!isLoading}
         multiline
         onChangeText={onChangeInput}
         placeholder="Ask about this article..."
         placeholderTextColor={colors.inkSoft}
-        style={[styles.input, { color: colors.ink }]}
+        style={[
+          styles.input,
+          {
+            backgroundColor: colors.parchmentMuted,
+            borderColor: colors.borderSoft,
+            color: colors.ink,
+          },
+        ]}
         value={input}
       />
       <View style={styles.toolbar}>
@@ -61,7 +74,7 @@ export function ChatComposer({
               styles.secondaryAction,
               {
                 backgroundColor: colors.secondarySurface,
-                borderColor: colors.secondaryBorder,
+                borderColor: colors.borderSoft,
               },
               pressed && styles.pressed,
             ]}
@@ -83,7 +96,14 @@ export function ChatComposer({
             pressed && styles.pressed,
           ]}
         >
-          {isLoading ? <ActivityIndicator color={colors.accent} /> : <AntDesign name="send" size={16} />}
+          {isLoading ? (
+            <ActivityIndicator color={colors.accent} />
+          ) : (
+            <>
+              <Text style={styles.submitText}>Send</Text>
+              <AntDesign color="#F8FBF9" name="arrow-right" size={14} />
+            </>
+          )}
         </Pressable>
       </View>
     </View>
@@ -92,18 +112,33 @@ export function ChatComposer({
 
 const styles = StyleSheet.create({
   wrapper: {
-    borderRadius: 24,
+    borderRadius: 26,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     borderWidth: 1,
     gap: spacing.md,
-    padding: spacing.xs,
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.sm,
+    paddingBottom: spacing.sm,
+    shadowOffset: { width: 0, height: -10 },
+    shadowOpacity: 0.1,
+    shadowRadius: 22,
+  },
+  kicker: {
+    fontSize: 11,
+    fontWeight: "700",
+    letterSpacing: 1.2,
+    textTransform: "uppercase",
   },
   input: {
+    borderRadius: 18,
+    borderWidth: 1,
     fontSize: 15,
     lineHeight: 22,
     maxHeight: 84,
     minHeight: 52,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
     textAlignVertical: "top",
   },
   toolbar: {
@@ -115,19 +150,26 @@ const styles = StyleSheet.create({
   actionsList:{
     flexDirection: "row",
     gap: spacing.xs,
+    flexShrink: 1,
   },
   secondaryAction: {
+    alignItems: "center",
     borderRadius: 999,
     borderWidth: 1,
-    paddingHorizontal: spacing.sm,
+    justifyContent: "center",
+    minHeight: 38,
+    paddingHorizontal: spacing.md,
     paddingVertical: 8,
   },
   secondaryText: {
     fontSize: 12,
     fontWeight: "700",
+    letterSpacing: 0.4,
   },
   submit: {
     borderRadius: 999,
+    flexDirection: "row",
+    gap: spacing.xs,
     paddingHorizontal: spacing.md,
     paddingVertical: 10,
   },

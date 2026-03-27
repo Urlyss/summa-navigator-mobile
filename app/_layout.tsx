@@ -14,11 +14,14 @@ function RootStack() {
         },
         headerTintColor: colors.ink,
         headerShadowVisible: false,
+        headerBackButtonDisplayMode: "minimal",
         contentStyle: {
           backgroundColor: colors.parchmentMuted,
         },
         headerTitleStyle: {
+          fontFamily: "serif",
           fontWeight: "700",
+          fontSize: 20,
         },
       }}
     >

@@ -1,20 +1,30 @@
 import React from "react";
 import { router } from "expo-router";
-import { View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { LinkRow } from "@/components/link-row";
 import { PageShell } from "@/components/page-shell";
 import { SectionCard } from "@/components/section-card";
 import { StatePanel } from "@/components/state-panel";
 import { useLibrary } from "@/providers/library-provider";
+import { useAppTheme } from "@/providers/theme-provider";
+import { spacing } from "@/styles/theme";
 
 export default function LibraryScreen() {
   const { bookmarks, recents } = useLibrary();
+  const { colors } = useAppTheme();
 
   return (
     <PageShell>
+      <View style={[styles.headlineCard, { backgroundColor: colors.cardMuted, borderColor: colors.borderSoft }]}>
+        <Text selectable style={[styles.headline, { color: colors.ink }]}>Your private study shelf</Text>
+        <Text selectable style={[styles.copy, { color: colors.inkSoft }]}>
+          Saved entries and the last article you opened stay ready for a calmer return into the text.
+        </Text>
+      </View>
+
       <SectionCard eyebrow="Saved" title="Bookmarks">
         {bookmarks.length ? (
-          <View style={{ gap: 12 }}>
+          <View style={styles.stack}>
             {bookmarks.map((entry) => (
               <LinkRow
                 key={entry.id}
@@ -36,7 +46,7 @@ export default function LibraryScreen() {
 
       <SectionCard eyebrow="Recent" title="Last article read">
         {recents.length ? (
-          <View style={{ gap: 12 }}>
+          <View style={styles.stack}>
             {recents.map((entry) => (
               <LinkRow
                 key={entry.id}
@@ -58,3 +68,25 @@ export default function LibraryScreen() {
     </PageShell>
   );
 }
+
+const styles = StyleSheet.create({
+  headlineCard: {
+    borderRadius: 26,
+    borderWidth: 1,
+    gap: spacing.sm,
+    padding: spacing.xl,
+  },
+  headline: {
+    fontFamily: "serif",
+    fontSize: 30,
+    fontWeight: "700",
+    lineHeight: 36,
+  },
+  copy: {
+    fontSize: 15,
+    lineHeight: 24,
+  },
+  stack: {
+    gap: 12,
+  },
+});

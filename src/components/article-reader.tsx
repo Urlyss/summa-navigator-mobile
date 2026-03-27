@@ -87,7 +87,8 @@ export function ArticleReader({ article }: { article: Article }) {
             style={({ pressed }) => [
               styles.tab,
               {
-                backgroundColor: activeTab === tab.key ? colors.accentStrong : colors.rowBadge,
+                backgroundColor: activeTab === tab.key ? colors.accentStrong : colors.cardMuted,
+                borderColor: activeTab === tab.key ? colors.accentStrong : colors.borderSoft,
               },
               pressed && styles.pressed,
             ]}
@@ -114,7 +115,15 @@ export function ArticleReader({ article }: { article: Article }) {
 
       <ReaderNavigation previousId={previousId} nextId={nextId} />
 
-      <View style={[styles.contextCard, { backgroundColor: colors.secondarySurface, borderColor: colors.border }]}>
+      <View
+        style={[
+          styles.contextCard,
+          {
+            backgroundColor: colors.cardMuted,
+            borderColor: colors.borderSoft,
+          },
+        ]}
+      >
         <Text selectable style={[styles.contextLabel, { color: colors.accentStrong }]}>
           Article context
         </Text>
@@ -127,7 +136,10 @@ export function ArticleReader({ article }: { article: Article }) {
         onPress={() => setIsChatOpen(true)}
         style={({ pressed }) => [
           styles.fab,
-          { backgroundColor: colors.teal },
+          {
+            backgroundColor: colors.teal,
+            boxShadow: `0 16px 40px ${colors.shadow}`,
+          },
           pressed && styles.pressed,
         ]}
       >
@@ -146,44 +158,47 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "serif",
-    fontSize: 30,
+    fontSize: 34,
     fontWeight: "700",
-    lineHeight: 38,
+    lineHeight: 42,
   },
   tabList: {
     flexDirection: "row",
     gap: spacing.sm,
+    flexWrap: "wrap",
   },
   tab: {
     borderRadius: 999,
+    borderWidth: 1,
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    paddingVertical: 10,
   },
   pressed: {
     opacity: 0.82,
   },
   tabText: {
-    fontSize: 13,
-    fontWeight: "700",
-  },
-  stack: {
-    gap: spacing.lg,
-  },
-  contextCard: {
-    borderRadius: 20,
-    borderWidth: 1,
-    gap: spacing.xs,
-    padding: spacing.md,
-  },
-  contextLabel: {
     fontSize: 12,
     fontWeight: "700",
-    letterSpacing: 1,
+    letterSpacing: 0.4,
+  },
+  stack: {
+    gap: spacing.xl,
+  },
+  contextCard: {
+    borderRadius: 24,
+    borderWidth: 1,
+    gap: spacing.sm,
+    padding: spacing.lg,
+  },
+  contextLabel: {
+    fontSize: 11,
+    fontWeight: "700",
+    letterSpacing: 1.6,
     textTransform: "uppercase",
   },
   contextValue: {
-    fontSize: 13,
-    fontWeight: "600",
+    fontSize: 14,
+    lineHeight: 20,
   },
   fab: {
     alignItems: "center",
@@ -191,8 +206,8 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     flexDirection: "row",
     gap: spacing.sm,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
   },
   fabText: {
     color: "#F8FBF9",

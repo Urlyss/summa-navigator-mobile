@@ -26,8 +26,9 @@ export function StatePanel({
       style={[
         styles.panel,
         {
-          backgroundColor: isError ? (isDark ? "#37211A" : "#FFF4F1") : colors.card,
-          borderColor: isError ? (isDark ? "#8B5749" : "#D7A59A") : colors.border,
+          backgroundColor: isError ? (isDark ? "#2C1917" : "#FFF5F2") : colors.cardMuted,
+          borderColor: isError ? (isDark ? "#8B5749" : "#D7A59A") : colors.borderSoft,
+          boxShadow: `0 8px 24px ${colors.shadow}`,
         },
       ]}
     >
@@ -55,24 +56,25 @@ export function StatePanel({
 
 const styles = StyleSheet.create({
   panel: {
-    borderRadius: 24,
+    borderRadius: 26,
     borderWidth: 1,
-    gap: spacing.sm,
-    padding: spacing.lg,
+    gap: spacing.md,
+    padding: spacing.xl,
   },
   title: {
     fontFamily: "serif",
     fontSize: 22,
     fontWeight: "700",
+    lineHeight: 28,
   },
   body: {
     fontSize: 15,
-    lineHeight: 22,
+    lineHeight: 24,
   },
   button: {
     alignSelf: "flex-start",
     borderRadius: 999,
-    paddingHorizontal: spacing.md,
+    paddingHorizontal: spacing.lg,
     paddingVertical: spacing.sm,
   },
   pressed: {

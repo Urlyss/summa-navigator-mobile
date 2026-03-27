@@ -22,12 +22,24 @@ export function ChatbotDrawer({ article, visible, onClose }: ChatbotDrawerProps)
         <View style={[styles.sheet, { backgroundColor: colors.sheetSurface }]}>
           <View style={[styles.handle, { backgroundColor: colors.sheetHandle }]} />
           <View style={styles.header}>
-            <Text selectable style={[styles.title, { color: colors.ink }]}>
-              Ask Thomas AI
-            </Text>
+            <View style={styles.headerCopy}>
+              <Text selectable style={[styles.eyebrow, { color: colors.inkFaint }]}>
+                Editorial assistant
+              </Text>
+              <Text selectable style={[styles.title, { color: colors.ink }]}>
+                Ask Thomas AI
+              </Text>
+            </View>
             <Pressable
               onPress={onClose}
-              style={({ pressed }) => [styles.closeButton, { backgroundColor: colors.secondarySurface }, pressed && styles.pressed]}
+              style={({ pressed }) => [
+                styles.closeButton,
+                {
+                  backgroundColor: colors.secondarySurface,
+                  borderColor: colors.borderSoft,
+                },
+                pressed && styles.pressed,
+              ]}
             >
               <Text style={[styles.closeText, { color: colors.accentStrong }]}>Close</Text>
             </Pressable>
@@ -62,9 +74,19 @@ const styles = StyleSheet.create({
     width: 52,
   },
   header: {
-    alignItems: "center",
+    alignItems: "flex-start",
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  headerCopy: {
+    flexShrink: 1,
+    gap: 2,
+  },
+  eyebrow: {
+    fontSize: 11,
+    fontWeight: "700",
+    letterSpacing: 1.2,
+    textTransform: "uppercase",
   },
   title: {
     fontFamily: "serif",
@@ -73,6 +95,7 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     borderRadius: 999,
+    borderWidth: 1,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
   },

@@ -72,7 +72,27 @@ export function Chatbot({ article }: {article: Article;}) {
 
   return (
     <View style={styles.wrapper}>
-      <View style={[styles.conversationFrame, { backgroundColor: colors.parchmentMuted, borderColor: colors.border }]}>
+      <View style={styles.intro}>
+        <Text selectable style={[styles.eyebrow, { color: colors.inkFaint }]}>
+          Article context
+        </Text>
+        <Text selectable style={[styles.contextTitle, { color: colors.ink }]}>
+          Grounded in the passage you are reading
+        </Text>
+        <Text selectable style={[styles.contextBody, { color: colors.inkSoft }]}>
+          Thomas AI responds from the current article context first, so questions stay anchored to the text instead of drifting away from the page.
+        </Text>
+      </View>
+      <View
+        style={[
+          styles.conversationFrame,
+          {
+            backgroundColor: colors.parchmentMuted,
+            borderColor: colors.borderSoft,
+            shadowColor: colors.shadow,
+          },
+        ]}
+      >
         <ScrollView
           ref={scrollRef}
           keyboardShouldPersistTaps="handled"
@@ -133,22 +153,35 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: spacing.md,
   },
-  header: {
-    fontFamily: "serif",
-    fontSize: 24,
-    fontWeight: "700",
+  intro: {
+    gap: 4,
   },
-  subheader: {
+  eyebrow: {
+    fontSize: 11,
+    fontWeight: "700",
+    letterSpacing: 1.2,
+    textTransform: "uppercase",
+  },
+  contextTitle: {
+    fontFamily: "serif",
+    fontSize: 22,
+    fontWeight: "700",
+    lineHeight: 28,
+  },
+  contextBody: {
     fontSize: 14,
-    lineHeight: 21,
+    lineHeight: 22,
   },
   conversationFrame: {
     flex: 1,
-    borderRadius: 24,
+    borderRadius: 28,
     borderWidth: 1,
     minHeight: 0,
     overflow: "hidden",
     paddingBottom: spacing.xs,
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.08,
+    shadowRadius: 26,
   },
   scroll: {
     flex: 1,
@@ -182,7 +215,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     gap: spacing.sm,
     left: 0,
-    paddingHorizontal: spacing.xs,
+    paddingHorizontal: spacing.sm,
     paddingTop: spacing.sm,
     position: "absolute",
     right: 0,

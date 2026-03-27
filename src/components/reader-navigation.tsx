@@ -23,11 +23,15 @@ export function ReaderNavigation({ previousId, nextId }: ReaderNavigationProps) 
         }}
         style={({ pressed }) => [
           styles.button,
-          { backgroundColor: previousId ? colors.teal : colors.border },
+          {
+            backgroundColor: previousId ? colors.accentStrong : colors.cardMuted,
+            borderColor: previousId ? colors.accentStrong : colors.borderSoft,
+          },
           pressed && previousId && styles.pressed,
         ]}
       >
-        <Text style={styles.label}>Previous</Text>
+        <Text style={[styles.kicker, { color: previousId ? colors.gold : colors.inkFaint }]}>Back</Text>
+        <Text style={[styles.label, { color: previousId ? "#FFF8F0" : colors.inkFaint }]}>Previous</Text>
       </Pressable>
       <Pressable
         disabled={!nextId}
@@ -38,11 +42,15 @@ export function ReaderNavigation({ previousId, nextId }: ReaderNavigationProps) 
         }}
         style={({ pressed }) => [
           styles.button,
-          { backgroundColor: nextId ? colors.teal : colors.border },
+          {
+            backgroundColor: nextId ? colors.teal : colors.cardMuted,
+            borderColor: nextId ? colors.teal : colors.borderSoft,
+          },
           pressed && nextId && styles.pressed,
         ]}
       >
-        <Text style={styles.label}>Next</Text>
+        <Text style={[styles.kicker, { color: nextId ? colors.gold : colors.inkFaint }]}>Continue</Text>
+        <Text style={[styles.label, { color: nextId ? "#F7FCFB" : colors.inkFaint }]}>Next</Text>
       </Pressable>
     </View>
   );
@@ -56,15 +64,22 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    borderRadius: 999,
+    borderRadius: 26,
+    borderWidth: 1,
     flex: 1,
-    paddingVertical: spacing.sm,
+    gap: 4,
+    paddingVertical: spacing.md,
   },
   pressed: {
     opacity: 0.82,
   },
+  kicker: {
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1.4,
+    textTransform: "uppercase",
+  },
   label: {
-    color: "#F8FBF9",
     fontSize: 14,
     fontWeight: "700",
   },

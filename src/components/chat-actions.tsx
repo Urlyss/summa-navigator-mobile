@@ -23,23 +23,29 @@ export function ChatActions({
           onPress={onRetry}
           style={({ pressed }) => [
             styles.action,
-            { backgroundColor: colors.secondarySurface, borderColor: colors.secondaryBorder },
+            {
+              backgroundColor: colors.secondarySurface,
+              borderColor: colors.borderSoft,
+            },
             pressed && styles.pressed,
           ]}
         >
           <Text style={[styles.label, { color: colors.accentStrong }]}>Retry</Text>
-          <AntDesign color={colors.accentStrong} name="reload"  />
+          <AntDesign color={colors.accentStrong} name="reload" size={13} />
         </Pressable>
         <Pressable
           onPress={onCopy}
           style={({ pressed }) => [
             styles.action,
-            { backgroundColor: colors.secondarySurface, borderColor: colors.secondaryBorder },
+            {
+              backgroundColor: colors.secondarySurface,
+              borderColor: colors.borderSoft,
+            },
             pressed && styles.pressed,
           ]}
         >
           <Text style={[styles.label, { color: colors.accentStrong }]}>{copyLabel}</Text>
-          <AntDesign color={colors.accentStrong} name={copyLabel === "Copy" ? "copy" : "check"}  />
+          <AntDesign color={colors.accentStrong} name={copyLabel === "Copy" ? "copy" : "check"} size={13} />
         </Pressable>
     </View>
   );
@@ -50,19 +56,21 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     flexDirection: "row",
     gap: spacing.xs,
+    marginTop: spacing.xs,
   },
   action: {
+    alignItems: "center",
     borderRadius: 999,
     borderWidth: 1,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: 8,
     flexDirection: "row",
     gap: spacing.xs,
-    alignItems: "center",
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 8,
   },
   label: {
     fontSize: 12,
     fontWeight: "700",
+    letterSpacing: 0.3,
   },
   pressed: {
     opacity: 0.82,

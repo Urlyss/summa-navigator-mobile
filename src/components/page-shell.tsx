@@ -14,10 +14,17 @@ export function PageShell({ children, style, refreshControl }: PageShellProps) {
 
   return (
     <LinearGradient colors={colors.pageGradient} style={styles.gradient}>
+      <LinearGradient
+        colors={[colors.parchmentGlass, "transparent"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.overlay}
+      />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={[styles.content, style]}
         refreshControl={refreshControl}
+        style={styles.scroll}
       >
         {children}
       </ScrollView>
@@ -29,7 +36,15 @@ const styles = StyleSheet.create({
   gradient: {
     flex: 1,
   },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    opacity: 0.85,
+  },
+  scroll: {
+    flex: 1,
+  },
   content: {
+    flexGrow: 1,
     padding: spacing.lg,
     gap: spacing.lg,
   },

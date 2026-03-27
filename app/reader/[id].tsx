@@ -128,6 +128,9 @@ export default function ReaderScreen() {
               <FontAwesome color={colors.border} name={bookmarked ? "bookmark" : "bookmark-o"} size={16} />
             </Pressable>
           </View>
+          <Text selectable style={[styles.meta, { color: colors.inkFaint }]}>
+            Reader view preserves the original hierarchy while giving you a quieter, more legible study surface.
+          </Text>
         </SectionCard>
 
         {contentQuery.isLoading ? (
@@ -198,5 +201,9 @@ const styles = StyleSheet.create({
   actionText: {
     color: "#FFF7EC",
     fontWeight: "700",
+  },
+  meta: {
+    fontSize: 13,
+    lineHeight: 19,
   },
 });

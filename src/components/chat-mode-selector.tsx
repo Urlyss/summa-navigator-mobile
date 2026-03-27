@@ -24,15 +24,16 @@ export function ChatModeSelector({ modes, value, onChange }: ChatModeSelectorPro
           styles.trigger,
           {
             backgroundColor: colors.secondarySurface,
-            borderColor: colors.secondaryBorder,
+            borderColor: colors.borderSoft,
           },
           pressed && styles.pressed,
         ]}
       >
-        <Text style={[styles.triggerText, { color: colors.accentStrong }]}>{currentMode.label}</Text>
-        <Text style={[styles.triggerText, { color: colors.accentStrong }]}>
-          <FontAwesome color={colors.accentStrong} name="caret-down" size={12} />
+        <Text selectable style={[styles.kicker, { color: colors.inkFaint }]}>
+          Mode
         </Text>
+        <Text style={[styles.triggerText, { color: colors.accentStrong }]}>{currentMode.label}</Text>
+        <FontAwesome color={colors.accentStrong} name="caret-down" size={12} />
       </Pressable>
 
       <Modal animationType="fade" onRequestClose={() => setOpen(false)} transparent visible={open}>
@@ -81,8 +82,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flexDirection: "row",
     gap: spacing.xs,
-    paddingHorizontal: spacing.xs,
-    paddingVertical: spacing.xs,
+    minHeight: 38,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 8,
+  },
+  kicker: {
+    fontSize: 10,
+    fontWeight: "700",
+    letterSpacing: 1,
+    textTransform: "uppercase",
   },
   triggerText: {
     fontSize: 12,

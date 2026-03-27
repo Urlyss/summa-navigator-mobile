@@ -3,15 +3,21 @@ export type ThemeMode = "light" | "dark";
 export type AppThemeColors = {
   ink: string;
   inkSoft: string;
+  inkFaint: string;
   parchment: string;
   parchmentDeep: string;
   parchmentMuted: string;
+  parchmentGlass: string;
   accent: string;
   accentStrong: string;
   accentSoft: string;
   teal: string;
+  gold: string;
   border: string;
+  borderSoft: string;
   card: string;
+  cardElevated: string;
+  cardMuted: string;
   error: string;
   success: string;
   pageGradient: [string, string, string];
@@ -23,6 +29,7 @@ export type AppThemeColors = {
   secondaryBorder: string;
   tabBarBackground: string;
   tabBarInactive: string;
+  shadow: string;
   overlay: string;
   sheetSurface: string;
   sheetHandle: string;
@@ -30,60 +37,74 @@ export type AppThemeColors = {
 };
 
 export const lightTheme: AppThemeColors = {
-  ink: "#1E1B16",
-  inkSoft: "#544A3D",
-  parchment: "#F6F0E1",
-  parchmentDeep: "#E8D8B6",
-  parchmentMuted: "#F9F4EA",
-  accent: "#8A5A24",
-  accentStrong: "#6E4318",
-  accentSoft: "#D9B27C",
-  teal: "#2E6761",
-  border: "#D2C2A0",
-  card: "#FFFDF8",
+  ink: "#172023",
+  inkSoft: "#59656A",
+  inkFaint: "#7E8B91",
+  parchment: "#F4F0E8",
+  parchmentDeep: "#E4D8C8",
+  parchmentMuted: "#FAF6EF",
+  parchmentGlass: "rgba(255,250,244,0.78)",
+  accent: "#745643",
+  accentStrong: "#25343A",
+  accentSoft: "#D9C4AA",
+  teal: "#365C62",
+  gold: "#B88B54",
+  border: "#D6CDC1",
+  borderSoft: "#E7E0D5",
+  card: "#FFFDFC",
+  cardElevated: "#FFFCF8",
+  cardMuted: "#F7F1E8",
   error: "#A3392E",
   success: "#2E6A4C",
-  pageGradient: ["#F9F4EA", "#F6F0E1", "#F3E5C7"],
-  heroGradient: ["#FFF8E8", "#ECD8B6", "#D3B289"],
-  rowSurface: "#FFF9EF",
-  rowBadge: "#F0E0C5",
-  rowBadgeText: "#6E4318",
-  secondarySurface: "#FFF7E8",
-  secondaryBorder: "#B78A53",
-  tabBarBackground: "#FFF7EA",
-  tabBarInactive: "#826E57",
-  overlay: "rgba(20, 15, 10, 0.42)",
-  sheetSurface: "#FFF8EE",
-  sheetHandle: "#D7C5A8",
+  pageGradient: ["#FBF8F2", "#F3EDE3", "#E7DED1"],
+  heroGradient: ["#1F2E35", "#4A5D61", "#C6A06A"],
+  rowSurface: "#FFFDFC",
+  rowBadge: "#F2E7D7",
+  rowBadgeText: "#6D5640",
+  secondarySurface: "#F8F1E7",
+  secondaryBorder: "#C9B092",
+  tabBarBackground: "#FFF9F2",
+  tabBarInactive: "#8D7F72",
+  shadow: "rgba(39, 30, 24, 0.10)",
+  overlay: "rgba(15, 19, 21, 0.36)",
+  sheetSurface: "#FFF9F3",
+  sheetHandle: "#CCBBA8",
   statusBar: "dark",
 };
 
 export const darkTheme: AppThemeColors = {
-  ink: "#F6EFE2",
-  inkSoft: "#D6C8B5",
-  parchment: "#15110D",
-  parchmentDeep: "#231A13",
-  parchmentMuted: "#1B1510",
-  accent: "#E2B576",
-  accentStrong: "#F0C98F",
-  accentSoft: "#5B3E22",
-  teal: "#7FD1C3",
-  border: "#4A3A2C",
-  card: "#221912",
+  ink: "#F6F1E9",
+  inkSoft: "#B8C2C4",
+  inkFaint: "#8D999D",
+  parchment: "#101719",
+  parchmentDeep: "#172125",
+  parchmentMuted: "#111A1E",
+  parchmentGlass: "rgba(20,28,31,0.80)",
+  accent: "#D3B08A",
+  accentStrong: "#E9D0A4",
+  accentSoft: "#4C4033",
+  teal: "#6F9CA1",
+  gold: "#D5A86B",
+  border: "#2E3B40",
+  borderSoft: "#233036",
+  card: "#182125",
+  cardElevated: "#1D282D",
+  cardMuted: "#141D21",
   error: "#F19180",
   success: "#7FD1A5",
-  pageGradient: ["#16110D", "#1B1510", "#241B13"],
-  heroGradient: ["#332316", "#583D25", "#7A5531"],
-  rowSurface: "#2A1E16",
-  rowBadge: "#3C2A1C",
-  rowBadgeText: "#F0C98F",
-  secondarySurface: "#2C2118",
-  secondaryBorder: "#7A5531",
-  tabBarBackground: "#1E1712",
-  tabBarInactive: "#BBAA95",
-  overlay: "rgba(0, 0, 0, 0.58)",
-  sheetSurface: "#251B14",
-  sheetHandle: "#6B5540",
+  pageGradient: ["#0F171B", "#111A1E", "#172428"],
+  heroGradient: ["#293A3F", "#4B6570", "#B9874B"],
+  rowSurface: "#182125",
+  rowBadge: "#263238",
+  rowBadgeText: "#E9D0A4",
+  secondarySurface: "#1E2A2F",
+  secondaryBorder: "#38515C",
+  tabBarBackground: "#121B1F",
+  tabBarInactive: "#829095",
+  shadow: "rgba(0, 0, 0, 0.32)",
+  overlay: "rgba(0, 0, 0, 0.62)",
+  sheetSurface: "#152025",
+  sheetHandle: "#53636A",
   statusBar: "light",
 };
 
@@ -94,4 +115,5 @@ export const spacing = {
   lg: 20,
   xl: 24,
   xxl: 32,
+  xxxl: 40,
 };

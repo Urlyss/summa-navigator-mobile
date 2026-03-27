@@ -81,6 +81,9 @@ function SearchExperience({
             <Text style={styles.buttonText}>{isSearching ? "Searching..." : "Search"}</Text>
           </Pressable>
         </View>
+        <Text selectable style={[styles.helper, { color: colors.inkFaint }]}>
+          Try broad terms first, then refine once the index responds.
+        </Text>
 
         {!hasSearched ? (
           <StatePanel
@@ -157,6 +160,7 @@ export default function SearchScreen() {
   const [draftQuery, setDraftQuery] = React.useState("");
   const [hasSearched, setHasSearched] = React.useState(false);
   const { addSearch, searchHistory } = useLibrary();
+  const { colors } = useAppTheme();
 
   const handleLaunchSearch = React.useCallback(
     async (query: string) => {
@@ -182,6 +186,11 @@ export default function SearchScreen() {
 
   return (
     <PageShell>
+      <SectionCard eyebrow="Research" title="Editorial search">
+        <Text selectable style={[styles.lead, { color: colors.inkSoft }]}>
+          Search the indexed Summa quickly, then step into the full reader without changing your study flow.
+        </Text>
+      </SectionCard>
       <InstantSearch indexName={searchIndexName} searchClient={searchClient}>
         <Configure hitsPerPage={12} />
         <SearchExperience
@@ -201,16 +210,16 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
   },
   input: {
-    borderRadius: 18,
+    borderRadius: 24,
     borderWidth: 1,
     fontSize: 16,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.lg,
   },
   button: {
     alignSelf: "flex-start",
     borderRadius: 999,
-    paddingHorizontal: spacing.md,
+    paddingHorizontal: spacing.lg,
     paddingVertical: spacing.sm,
   },
   buttonDisabled: {
@@ -226,14 +235,22 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 15,
   },
+  helper: {
+    fontSize: 13,
+    lineHeight: 19,
+  },
+  lead: {
+    fontSize: 15,
+    lineHeight: 24,
+  },
   list: {
     gap: 12,
   },
   historyPill: {
     alignSelf: "flex-start",
     borderRadius: 999,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: 10,
   },
   historyText: {
     fontWeight: "700",

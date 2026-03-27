@@ -14,18 +14,25 @@ export default function TabsLayout() {
         },
         headerShadowVisible: false,
         headerTintColor: colors.ink,
+        headerTitleStyle: {
+          fontFamily: "serif",
+          fontSize: 22,
+          fontWeight: "700",
+        },
         tabBarActiveTintColor: colors.accentStrong,
         tabBarInactiveTintColor: colors.tabBarInactive,
         tabBarStyle: {
           backgroundColor: colors.tabBarBackground,
-          borderTopColor: colors.border,
-          height: 70,
-          paddingBottom: 10,
-          paddingTop: 10,
+          borderTopColor: colors.borderSoft,
+          borderTopWidth: 1,
+          height: 82,
+          paddingBottom: 14,
+          paddingTop: 12,
         },
         tabBarLabelStyle: {
-          fontSize: 12,
+          fontSize: 11,
           fontWeight: "700",
+          letterSpacing: 0.3,
         },
       }}
     >
