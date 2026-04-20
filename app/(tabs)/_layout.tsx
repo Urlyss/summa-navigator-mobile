@@ -10,29 +10,28 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerStyle: {
-          backgroundColor: colors.parchmentMuted,
+          backgroundColor: colors.parchment,
         },
         headerShadowVisible: false,
         headerTintColor: colors.ink,
         headerTitleStyle: {
           fontFamily: "serif",
-          fontSize: 22,
+          fontSize: 20,
           fontWeight: "700",
         },
-        tabBarActiveTintColor: colors.accentStrong,
-        tabBarInactiveTintColor: colors.tabBarInactive,
+        tabBarActiveTintColor: colors.teal,
+        tabBarInactiveTintColor: colors.inkFaint,
         tabBarStyle: {
-          backgroundColor: colors.tabBarBackground,
-          borderTopColor: colors.borderSoft,
+          backgroundColor: colors.parchment,
+          borderTopColor: colors.border,
           borderTopWidth: 1,
-          height: 82,
-          paddingBottom: 14,
-          paddingTop: 12,
+          height: 70,
+          paddingBottom: 10,
+          paddingTop: 8,
         },
         tabBarLabelStyle: {
-          fontSize: 11,
+          fontSize: 10,
           fontWeight: "700",
-          letterSpacing: 0.3,
         },
       }}
     >
@@ -41,7 +40,7 @@ export default function TabsLayout() {
         options={{
           title: "Home",
           tabBarLabel: "Home",
-          tabBarIcon: ({ color }) => <FontAwesome color={color} name="home" size={24} />,
+          tabBarIcon: ({ color }) => <FontAwesome color={color} name="home" size={20} />,
         }}
       />
       <Tabs.Screen
@@ -49,7 +48,7 @@ export default function TabsLayout() {
         options={{
           title: "Search",
           tabBarLabel: "Search",
-          tabBarIcon: ({ color }) => <FontAwesome color={color} name="search" size={24} />,
+          tabBarIcon: ({ color }) => <FontAwesome color={color} name="search" size={20} />,
         }}
       />
       <Tabs.Screen
@@ -57,7 +56,7 @@ export default function TabsLayout() {
         options={{
           title: "Library",
           tabBarLabel: "Library",
-          tabBarIcon: ({ color }) => <FontAwesome color={color} name="book" size={24} />,
+          tabBarIcon: ({ color }) => <FontAwesome color={color} name="book" size={20} />,
         }}
       />
       <Tabs.Screen
@@ -65,7 +64,7 @@ export default function TabsLayout() {
         options={{
           title: "Settings",
           tabBarLabel: "Settings",
-          tabBarIcon: ({ color }) => <FontAwesome color={color} name="cog" size={24} />,
+          tabBarIcon: ({ color }) => <FontAwesome color={color} name="cog" size={20} />,
         }}
       />
     </Tabs>

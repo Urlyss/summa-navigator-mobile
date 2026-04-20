@@ -15,9 +15,9 @@ export default function LibraryScreen() {
 
   return (
     <PageShell>
-      <View style={[styles.headlineCard, { backgroundColor: colors.cardMuted, borderColor: colors.borderSoft }]}>
-        <Text selectable style={[styles.headline, { color: colors.ink }]}>Your private study shelf</Text>
-        <Text selectable style={[styles.copy, { color: colors.inkSoft }]}>
+      <View style={[styles.headlineCard, { backgroundColor: colors.accentStrong, borderColor: colors.accentStrong }]}>
+        <Text selectable style={[styles.headline, { color: "#FFFFFF" }]}>Your private study shelf</Text>
+        <Text selectable style={[styles.copy, { color: "rgba(255,255,255,0.7)" }]}>
           Saved entries and the last article you opened stay ready for a calmer return into the text.
         </Text>
       </View>
@@ -71,20 +71,20 @@ export default function LibraryScreen() {
 
 const styles = StyleSheet.create({
   headlineCard: {
-    borderRadius: 26,
+    borderRadius: 8,
     borderWidth: 1,
     gap: spacing.sm,
     padding: spacing.xl,
   },
   headline: {
     fontFamily: "serif",
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: "700",
-    lineHeight: 36,
+    lineHeight: 34,
   },
   copy: {
-    fontSize: 15,
-    lineHeight: 24,
+    fontSize: 14,
+    lineHeight: 22,
   },
   stack: {
     gap: 12,

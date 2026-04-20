@@ -26,35 +26,35 @@ export default function HomeScreen() {
       <HeroBanner
         title="Carry the Summa in your pocket."
         body="Browse the structure of Aquinas' masterpiece with a reader-first Android experience, quick search, and a personal library for what you revisit most."
-        primaryLabel="Explore Parts"
-        secondaryLabel="Open Search"
+        primaryLabel="Explore"
+        secondaryLabel="Search"
         onPrimaryPress={() => router.push("/reader/PtFP")}
         onSecondaryPress={() => router.push("/search")}
       />
 
       <View style={styles.metricsRow}>
-        <View style={[styles.metricCard, { backgroundColor: colors.cardMuted, borderColor: colors.borderSoft }]}>
-          <Text selectable style={[styles.metricValue, { color: colors.ink }]}>{partsQuery.data?.length ?? "--"}</Text>
-          <Text selectable style={[styles.metricLabel, { color: colors.inkSoft }]}>Parts loaded</Text>
+        <View style={[styles.metricCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
+          <Text selectable style={[styles.metricValue, { color: colors.teal }]}>{partsQuery.data?.length ?? "--"}</Text>
+          <Text selectable style={[styles.metricLabel, { color: colors.inkSoft }]}>Parts</Text>
         </View>
-        <View style={[styles.metricCard, { backgroundColor: colors.cardMuted, borderColor: colors.borderSoft }]}>
-          <Text selectable style={[styles.metricValue, { color: colors.ink }]}>{bookmarks.length}</Text>
-          <Text selectable style={[styles.metricLabel, { color: colors.inkSoft }]}>Saved passages</Text>
+        <View style={[styles.metricCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
+          <Text selectable style={[styles.metricValue, { color: colors.teal }]}>{bookmarks.length}</Text>
+          <Text selectable style={[styles.metricLabel, { color: colors.inkSoft }]}>Saved</Text>
         </View>
-        <View style={[styles.metricCard, { backgroundColor: colors.cardMuted, borderColor: colors.borderSoft }]}>
-          <Text selectable style={[styles.metricValue, { color: colors.ink }]}>{recents.length ? "1" : "0"}</Text>
-          <Text selectable style={[styles.metricLabel, { color: colors.inkSoft }]}>Recent return</Text>
+        <View style={[styles.metricCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
+          <Text selectable style={[styles.metricValue, { color: colors.teal }]}>{recents.length ? "1" : "0"}</Text>
+          <Text selectable style={[styles.metricLabel, { color: colors.inkSoft }]}>Recent</Text>
         </View>
       </View>
 
-      <SectionCard eyebrow="Discover" title="Parts of the Summa Theologica">
+      <SectionCard eyebrow="Discover" title="Parts of the Summa">
         {partsQuery.isLoading ? (
           <Text selectable style={[styles.loadingText, { color: colors.inkSoft }]}>Loading the canon...</Text>
         ) : partsQuery.error ? (
           <StatePanel
             tone="error"
             title="Content is unavailable"
-            body="The mobile app could not reach the local content proxy for the top-level parts."
+            body="The mobile app could not reach the content proxy."
             actionLabel="Try again"
             onAction={() => partsQuery.refetch()}
           />
@@ -73,7 +73,7 @@ export default function HomeScreen() {
         )}
       </SectionCard>
 
-      <SectionCard eyebrow="Reader Tools" title="Continue where you left off">
+      <SectionCard eyebrow="History" title="Continue reading">
         {recents.length ? (
           <View style={styles.stack}>
             {recents.slice(0, 3).map((entry) => (
@@ -89,13 +89,13 @@ export default function HomeScreen() {
           </View>
         ) : (
           <StatePanel
-            title="No recent reading yet"
-            body="Open a part, question, or article and it will appear here for quick return visits."
+            title="No recent reading"
+            body="Open an article and it will appear here."
           />
         )}
       </SectionCard>
 
-      <SectionCard eyebrow="Saved" title="Bookmarks">
+      <SectionCard eyebrow="Library" title="Bookmarks">
         {bookmarks.length ? (
           <View style={styles.stack}>
             {bookmarks.slice(0, 3).map((entry) => (
@@ -111,8 +111,8 @@ export default function HomeScreen() {
           </View>
         ) : (
           <StatePanel
-            title="Your library is waiting"
-            body="Bookmark questions and articles you want to revisit. Saved entries stay on-device for now."
+            title="Library is empty"
+            body="Bookmark articles to save them here."
           />
         )}
       </SectionCard>
@@ -126,21 +126,21 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
   },
   metricCard: {
-    borderRadius: 22,
+    borderRadius: 8,
     borderWidth: 1,
     flex: 1,
-    gap: 4,
+    gap: 2,
     padding: spacing.md,
   },
   metricValue: {
     fontFamily: "serif",
-    fontSize: 26,
+    fontSize: 22,
     fontWeight: "700",
   },
   metricLabel: {
-    fontSize: 12,
-    fontWeight: "600",
-    lineHeight: 17,
+    fontSize: 11,
+    fontWeight: "800",
+    textTransform: "uppercase",
   },
   stack: {
     gap: 12,

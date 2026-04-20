@@ -24,14 +24,14 @@ export function ReaderNavigation({ previousId, nextId }: ReaderNavigationProps) 
         style={({ pressed }) => [
           styles.button,
           {
-            backgroundColor: previousId ? colors.accentStrong : colors.cardMuted,
-            borderColor: previousId ? colors.accentStrong : colors.borderSoft,
+            backgroundColor: previousId ? colors.card : colors.cardMuted,
+            borderColor: colors.border,
           },
           pressed && previousId && styles.pressed,
         ]}
       >
-        <Text style={[styles.kicker, { color: previousId ? colors.gold : colors.inkFaint }]}>Back</Text>
-        <Text style={[styles.label, { color: previousId ? "#FFF8F0" : colors.inkFaint }]}>Previous</Text>
+        <Text style={[styles.kicker, { color: previousId ? colors.inkFaint : "rgba(0,0,0,0.1)" }]}>Previous</Text>
+        <Text style={[styles.label, { color: previousId ? colors.ink : "rgba(0,0,0,0.1)" }]}>Back</Text>
       </Pressable>
       <Pressable
         disabled={!nextId}
@@ -44,13 +44,13 @@ export function ReaderNavigation({ previousId, nextId }: ReaderNavigationProps) 
           styles.button,
           {
             backgroundColor: nextId ? colors.teal : colors.cardMuted,
-            borderColor: nextId ? colors.teal : colors.borderSoft,
+            borderColor: nextId ? colors.teal : colors.border,
           },
           pressed && nextId && styles.pressed,
         ]}
       >
-        <Text style={[styles.kicker, { color: nextId ? colors.gold : colors.inkFaint }]}>Continue</Text>
-        <Text style={[styles.label, { color: nextId ? "#F7FCFB" : colors.inkFaint }]}>Next</Text>
+        <Text style={[styles.kicker, { color: nextId ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.1)" }]}>Continue</Text>
+        <Text style={[styles.label, { color: nextId ? "#FFFFFF" : "rgba(0,0,0,0.1)" }]}>Next</Text>
       </Pressable>
     </View>
   );
@@ -64,23 +64,23 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    borderRadius: 26,
+    borderRadius: 8,
     borderWidth: 1,
     flex: 1,
-    gap: 4,
+    gap: 2,
     paddingVertical: spacing.md,
   },
   pressed: {
-    opacity: 0.82,
+    opacity: 0.7,
   },
   kicker: {
-    fontSize: 10,
-    fontWeight: "700",
-    letterSpacing: 1.4,
+    fontSize: 9,
+    fontWeight: "800",
+    letterSpacing: 1,
     textTransform: "uppercase",
   },
   label: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: "700",
   },
 });

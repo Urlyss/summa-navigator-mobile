@@ -20,13 +20,13 @@ export function ChatSuggestions({ suggestions, onSelect }: ChatSuggestionsProps)
           style={({ pressed }) => [
             styles.card,
             {
-              backgroundColor: colors.cardMuted,
-              borderColor: colors.borderSoft,
+              backgroundColor: colors.card,
+              borderColor: colors.border,
             },
             pressed && styles.pressed,
           ]}
         >
-          <Text selectable style={[styles.text, { color: colors.accentStrong }]}>
+          <Text selectable style={[styles.text, { color: colors.teal }]}>
             {suggestion}
           </Text>
         </Pressable>
@@ -43,11 +43,10 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xs,
   },
   card: {
-    borderRadius: 20,
+    borderRadius: 6,
     borderWidth: 1,
-    minWidth: "47%",
     paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.sm,
+    paddingVertical: 10,
   },
   text: {
     fontSize: 12,
@@ -55,6 +54,6 @@ const styles = StyleSheet.create({
     lineHeight: 17,
   },
   pressed: {
-    opacity: 0.82,
+    opacity: 0.7,
   },
 });

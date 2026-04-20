@@ -22,52 +22,47 @@ export function ChatModeSelector({ modes, value, onChange }: ChatModeSelectorPro
         onPress={() => setOpen(true)}
         style={({ pressed }) => [
           styles.trigger,
-          {
-            backgroundColor: colors.secondarySurface,
-            borderColor: colors.borderSoft,
-          },
           pressed && styles.pressed,
         ]}
       >
-        <Text selectable style={[styles.kicker, { color: colors.inkFaint }]}>
-          Mode
-        </Text>
-        <Text style={[styles.triggerText, { color: colors.accentStrong }]}>{currentMode.label}</Text>
-        <FontAwesome color={colors.accentStrong} name="caret-down" size={12} />
+        <Text style={[styles.triggerText, { color: colors.inkSoft }]}>{currentMode.label}</Text>
+        <FontAwesome color={colors.inkFaint} name="chevron-down" size={10} />
       </Pressable>
 
       <Modal animationType="fade" onRequestClose={() => setOpen(false)} transparent visible={open}>
         <View style={styles.overlay}>
           <Pressable onPress={() => setOpen(false)} style={[StyleSheet.absoluteFillObject, { backgroundColor: colors.overlay }]} />
-          <View style={[styles.modalCard, { backgroundColor: colors.sheetSurface, borderColor: colors.border }]}>
+          <View style={[styles.modalCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
             <Text selectable style={[styles.title, { color: colors.ink }]}>
-              Choose a mode
+              Chat Mode
             </Text>
-            {modes.map((mode) => {
-              const active = mode.value === value;
+            <View style={styles.optionsList}>
+              {modes.map((mode) => {
+                const active = mode.value === value;
 
-              return (
-                <Pressable
-                  key={mode.value}
-                  onPress={() => {
-                    onChange(mode.value);
-                    setOpen(false);
-                  }}
-                  style={({ pressed }) => [
-                    styles.option,
-                    {
-                      backgroundColor: active ? colors.accentStrong : colors.secondarySurface,
-                      borderColor: active ? colors.accentStrong : colors.secondaryBorder,
-                    },
-                    pressed && styles.pressed,
-                  ]}
-                >
-                  <Text style={[styles.optionText, { color: active ? "#FFF8ED" : colors.accentStrong }]}>
-                    {mode.label}
-                  </Text>
-                </Pressable>
-              );
-            })}
+                return (
+                  <Pressable
+                    key={mode.value}
+                    onPress={() => {
+                      onChange(mode.value);
+                      setOpen(false);
+                    }}
+                    style={({ pressed }) => [
+                      styles.option,
+                      {
+                        backgroundColor: active ? colors.accentSoft : "transparent",
+                      },
+                      pressed && styles.pressed,
+                    ]}
+                  >
+                    <Text style={[styles.optionText, { color: active ? colors.accentStrong : colors.inkSoft }]}>
+                      {mode.label}
+                    </Text>
+                    {active && <FontAwesome color={colors.accentStrong} name="check" size={14} />}
+                  </Pressable>
+                );
+              })}
+            </View>
           </View>
         </View>
       </Modal>
@@ -78,54 +73,51 @@ export function ChatModeSelector({ modes, value, onChange }: ChatModeSelectorPro
 const styles = StyleSheet.create({
   trigger: {
     alignItems: "center",
-    borderRadius: 999,
-    borderWidth: 1,
     flexDirection: "row",
     gap: spacing.xs,
-    minHeight: 38,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: 8,
-  },
-  kicker: {
-    fontSize: 10,
-    fontWeight: "700",
-    letterSpacing: 1,
-    textTransform: "uppercase",
+    paddingVertical: 4,
   },
   triggerText: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: "700",
     textTransform:"capitalize"
   },
   overlay: {
     flex: 1,
     justifyContent: "center",
-    padding: spacing.lg,
+    alignItems: "center",
+    padding: spacing.xl,
   },
   modalCard: {
-    borderRadius: 24,
+    borderRadius: 8,
     borderWidth: 1,
-    gap: spacing.sm,
     padding: spacing.lg,
+    width: "100%",
+    maxWidth: 320,
+    gap: spacing.md,
   },
   title: {
     fontFamily: "serif",
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "700",
-    marginBottom: spacing.xs,
+  },
+  optionsList: {
+    gap: 4,
   },
   option: {
-    borderRadius: 18,
-    borderWidth: 1,
+    borderRadius: 6,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    paddingVertical: 12,
   },
   optionText: {
-    fontSize: 14,
-    fontWeight: "700",
+    fontSize: 15,
+    fontWeight: "600",
     textTransform:"capitalize"
   },
   pressed: {
-    opacity: 0.82,
+    opacity: 0.7,
   },
 });

@@ -27,30 +27,30 @@ interface IStylesNode {
   const markdownStyle = React.useMemo(
     () => ({
       body: {
-        color: isAssistant ? colors.ink : "#F8FBF9",
+        color: isAssistant ? colors.ink : "#FFFFFF",
         fontSize: 15,
         lineHeight: 24,
       },
       paragraph: {
-        color: isAssistant ? colors.ink : "#F8FBF9",
+        color: isAssistant ? colors.ink : "#FFFFFF",
         fontSize: 15,
         lineHeight: 24,
         marginTop: 0,
         marginBottom: spacing.sm,
       },
       heading1: {
-        color: isAssistant ? colors.ink : "#F8FBF9",
+        color: isAssistant ? colors.ink : "#FFFFFF",
         fontFamily: "serif",
-        fontSize: 22,
-        lineHeight: 30,
+        fontSize: 20,
+        lineHeight: 28,
         marginTop: 0,
         marginBottom: spacing.sm,
       },
       heading2: {
-        color: isAssistant ? colors.ink : "#F8FBF9",
+        color: isAssistant ? colors.ink : "#FFFFFF",
         fontFamily: "serif",
-        fontSize: 19,
-        lineHeight: 26,
+        fontSize: 18,
+        lineHeight: 24,
         marginTop: spacing.xs,
         marginBottom: spacing.xs,
       },
@@ -63,35 +63,34 @@ interface IStylesNode {
         marginBottom: spacing.sm,
       },
       list_item: {
-        color: isAssistant ? colors.ink : "#F8FBF9",
+        color: isAssistant ? colors.ink : "#FFFFFF",
       },
       strong: {
-        color: isAssistant ? colors.accentStrong : "#F8FBF9",
-        fontWeight: 700,
+        color: isAssistant ? colors.teal : "#FFFFFF",
+        fontWeight: "700",
       },
       em: {
-        color: isAssistant ? colors.inkSoft : "#F0F4F3",
+        color: isAssistant ? colors.inkSoft : "rgba(255,255,255,0.8)",
       },
       blockquote: {
-        borderLeftColor: isAssistant ? colors.gold : "#F6D58D",
-        borderLeftWidth: 3,
-        color: isAssistant ? colors.inkSoft : "#F0F4F3",
+        borderLeftColor: isAssistant ? colors.gold : "rgba(255,255,255,0.4)",
+        borderLeftWidth: 2,
+        color: isAssistant ? colors.inkSoft : "rgba(255,255,255,0.8)",
         marginLeft: 0,
         paddingLeft: spacing.sm,
       },
       code_inline: {
-        backgroundColor: isAssistant ? colors.secondarySurface : "rgba(255,255,255,0.12)",
-        borderRadius: 6,
-        color: isAssistant ? colors.accentStrong : "#F8FBF9",
-        paddingHorizontal: 6,
-        paddingVertical: 2,
+        backgroundColor: isAssistant ? colors.secondarySurface : "rgba(255,255,255,0.15)",
+        borderRadius: 4,
+        color: isAssistant ? colors.teal : "#FFFFFF",
+        paddingHorizontal: 4,
+        paddingVertical: 1,
       },
     }),
     [colors, isAssistant]
   );
 
   const rules = {
-    // Override the 'textgroup' rule to wrap text in a selectable Text component
     textgroup: (
       node: ITextNode,
       children: any,
@@ -112,16 +111,13 @@ interface IStylesNode {
           styles.bubble,
           {
             alignSelf: isAssistant ? "flex-start" : "flex-end",
-            backgroundColor: isAssistant ? colors.cardElevated : colors.teal,
-            borderColor: isAssistant ? colors.borderSoft : colors.teal,
-            shadowColor: colors.shadow,
+            backgroundColor: isAssistant ? colors.cardMuted : colors.teal,
+            borderColor: isAssistant ? colors.border : colors.teal,
           },
-          isAssistant ? styles.assistantBubble : styles.userBubble,
         ]}
       >
         <View style={styles.metaRow}>
-          {isAssistant ? <View style={[styles.rule, { backgroundColor: colors.gold }]} /> : null}
-          <Text style={[styles.role, { color: isAssistant ? colors.accentStrong : "#F8FBF9" }]}>
+          <Text style={[styles.role, { color: isAssistant ? colors.inkFaint : "rgba(255,255,255,0.7)" }]}>
             {isAssistant ? "Thomas AI" : "You"}
           </Text>
         </View>
@@ -158,13 +154,13 @@ interface IStylesNode {
           style={({ pressed }) => [
             styles.reasoningCard,
             {
-              backgroundColor: colors.parchmentMuted,
-              borderColor: colors.borderSoft,
+              backgroundColor: isAssistant ? colors.secondarySurface : "rgba(255,255,255,0.1)",
+              borderColor: isAssistant ? colors.border : "rgba(255,255,255,0.2)",
             },
             pressed && styles.pressed,
           ]}
         >
-          <Text style={[styles.reasoningTrigger, { color: colors.accentStrong }]}>
+          <Text style={[styles.reasoningTrigger, { color: isAssistant ? colors.inkSoft : "#FFFFFF" }]}>
             {showReasoning ? "Hide reasoning" : "Show reasoning"}
           </Text>
           {showReasoning ? (
@@ -185,62 +181,42 @@ interface IStylesNode {
 const styles = StyleSheet.create({
   wrapper: {
     gap: spacing.xs,
+    marginBottom: spacing.md,
   },
   userWrapper: {
     alignItems: "flex-end",
   },
   bubble: {
-    borderRadius: 26,
+    borderRadius: 8,
     borderWidth: 1,
-    gap: spacing.xs,
-    maxWidth: "92%",
+    gap: 4,
+    maxWidth: "88%",
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.08,
-    shadowRadius: 22,
-  },
-  assistantBubble: {
-    borderTopLeftRadius: 10,
-  },
-  userBubble: {
-    borderBottomRightRadius: 10,
   },
   metaRow: {
     alignItems: "center",
     flexDirection: "row",
-    gap: spacing.xs,
-  },
-  rule: {
-    borderRadius: 999,
-    height: 3,
-    width: 18,
+    marginBottom: 2,
   },
   role: {
-    fontSize: 12,
-    fontWeight: "700",
-    letterSpacing: 0.8,
+    fontSize: 10,
+    fontWeight: "800",
+    letterSpacing: 0.5,
     textTransform: "uppercase",
   },
-  body: {
-    fontSize: 15,
-    lineHeight: 23,
-  },
   reasoningCard: {
-    borderRadius: 18,
+    borderRadius: 6,
     borderWidth: 1,
     gap: spacing.xs,
     padding: spacing.sm,
+    marginTop: spacing.xs,
   },
   reasoningTrigger: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: "700",
   },
-  reasoningBody: {
-    fontSize: 13,
-    lineHeight: 20,
-  },
   pressed: {
-    opacity: 0.82,
+    opacity: 0.7,
   },
 });

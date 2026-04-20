@@ -34,55 +34,44 @@ export function ChatComposer({
       style={[
         styles.wrapper,
         {
-          backgroundColor: colors.cardElevated,
-          borderColor: colors.borderSoft,
-          shadowColor: colors.shadow,
+          backgroundColor: colors.card,
+          borderTopColor: colors.border,
+          borderTopWidth: 1,
         },
       ]}
     >
-      <Text selectable style={[styles.kicker, { color: colors.inkFaint }]}>
-        Compose a response
-      </Text>
       <TextInput
         editable={!isLoading}
         multiline
         onChangeText={onChangeInput}
-        placeholder="Ask about this article..."
-        placeholderTextColor={colors.inkSoft}
+        placeholder="Ask a question..."
+        placeholderTextColor={colors.inkFaint}
         style={[
           styles.input,
           {
-            backgroundColor: colors.parchmentMuted,
-            borderColor: colors.borderSoft,
             color: colors.ink,
           },
         ]}
         value={input}
       />
       <View style={styles.toolbar}>
-        <View style={styles.actionsList}>
-          <View>
-            <ChatModeSelector
-              modes={modes}
-              onChange={onChangeMode}
-              value={mode}
-            />
-          </View>
+        <View style={styles.leftActions}>
+          <ChatModeSelector
+            modes={modes}
+            onChange={onChangeMode}
+            value={mode}
+          />
           <Pressable
             onPress={onReset}
             style={({ pressed }) => [
               styles.secondaryAction,
-              {
-                backgroundColor: colors.secondarySurface,
-                borderColor: colors.borderSoft,
-              },
               pressed && styles.pressed,
             ]}
           >
             <Text
-              style={[styles.secondaryText, { color: colors.accentStrong }]}
+              style={[styles.secondaryText, { color: colors.inkSoft }]}
             >
-              Reset
+              Clear
             </Text>
           </Pressable>
         </View>
@@ -97,12 +86,9 @@ export function ChatComposer({
           ]}
         >
           {isLoading ? (
-            <ActivityIndicator color={colors.accent} />
+            <ActivityIndicator color="#FFFFFF" size="small" />
           ) : (
-            <>
-              <Text style={styles.submitText}>Send</Text>
-              <AntDesign color="#F8FBF9" name="arrow-right" size={14} />
-            </>
+            <AntDesign color="#FFFFFF" name="arrowup" size={18} />
           )}
         </Pressable>
       </View>
@@ -112,75 +98,47 @@ export function ChatComposer({
 
 const styles = StyleSheet.create({
   wrapper: {
-    borderRadius: 26,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-    borderWidth: 1,
-    gap: spacing.md,
     paddingHorizontal: spacing.md,
-    paddingTop: spacing.sm,
-    paddingBottom: spacing.sm,
-    shadowOffset: { width: 0, height: -10 },
-    shadowOpacity: 0.1,
-    shadowRadius: 22,
-  },
-  kicker: {
-    fontSize: 11,
-    fontWeight: "700",
-    letterSpacing: 1.2,
-    textTransform: "uppercase",
+    paddingTop: spacing.md,
+    paddingBottom: spacing.lg,
+    gap: spacing.sm,
   },
   input: {
-    borderRadius: 18,
-    borderWidth: 1,
-    fontSize: 15,
+    fontSize: 16,
     lineHeight: 22,
-    maxHeight: 84,
-    minHeight: 52,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    maxHeight: 120,
+    minHeight: 44,
+    paddingVertical: 8,
     textAlignVertical: "top",
   },
   toolbar: {
     alignItems: "center",
     flexDirection: "row",
-    gap: spacing.xs,
     justifyContent: "space-between",
   },
-  actionsList:{
+  leftActions: {
     flexDirection: "row",
-    gap: spacing.xs,
-    flexShrink: 1,
+    alignItems: "center",
+    gap: spacing.md,
   },
   secondaryAction: {
-    alignItems: "center",
-    borderRadius: 999,
-    borderWidth: 1,
-    justifyContent: "center",
-    minHeight: 38,
-    paddingHorizontal: spacing.md,
-    paddingVertical: 8,
+    paddingVertical: 4,
   },
   secondaryText: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: "700",
-    letterSpacing: 0.4,
   },
   submit: {
-    borderRadius: 999,
-    flexDirection: "row",
-    gap: spacing.xs,
-    paddingHorizontal: spacing.md,
-    paddingVertical: 10,
-  },
-  submitText: {
-    color: "#F8FBF9",
-    fontWeight: "700",
+    borderRadius: 8,
+    height: 40,
+    width: 40,
+    alignItems: "center",
+    justifyContent: "center",
   },
   disabled: {
-    opacity: 0.5,
+    opacity: 0.3,
   },
   pressed: {
-    opacity: 0.82,
+    opacity: 0.7,
   },
 });

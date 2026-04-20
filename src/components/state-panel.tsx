@@ -26,9 +26,8 @@ export function StatePanel({
       style={[
         styles.panel,
         {
-          backgroundColor: isError ? (isDark ? "#2C1917" : "#FFF5F2") : colors.cardMuted,
-          borderColor: isError ? (isDark ? "#8B5749" : "#D7A59A") : colors.borderSoft,
-          boxShadow: `0 8px 24px ${colors.shadow}`,
+          backgroundColor: isError ? (isDark ? "#2D1B19" : "#FFF5F2") : colors.cardMuted,
+          borderColor: isError ? (isDark ? "#8B443B" : "#FEE2E2") : colors.border,
         },
       ]}
     >
@@ -43,7 +42,7 @@ export function StatePanel({
           onPress={onAction}
           style={({ pressed }) => [
             styles.button,
-            { backgroundColor: colors.accentStrong },
+            { backgroundColor: isError ? colors.error : colors.teal },
             pressed && styles.pressed,
           ]}
         >
@@ -56,33 +55,34 @@ export function StatePanel({
 
 const styles = StyleSheet.create({
   panel: {
-    borderRadius: 26,
+    borderRadius: 8,
     borderWidth: 1,
-    gap: spacing.md,
-    padding: spacing.xl,
+    gap: spacing.sm,
+    padding: spacing.lg,
   },
   title: {
     fontFamily: "serif",
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "700",
-    lineHeight: 28,
+    lineHeight: 26,
   },
   body: {
-    fontSize: 15,
-    lineHeight: 24,
+    fontSize: 14,
+    lineHeight: 22,
   },
   button: {
     alignSelf: "flex-start",
-    borderRadius: 999,
+    borderRadius: 6,
     paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.sm,
+    paddingVertical: 10,
+    marginTop: spacing.xs,
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "700",
   },
   pressed: {
     opacity: 0.82,
-  },
-  buttonText: {
-    color: "#FFF8EE",
-    fontSize: 13,
-    fontWeight: "700",
   },
 });

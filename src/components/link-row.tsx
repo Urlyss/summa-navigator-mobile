@@ -27,37 +27,32 @@ export function LinkRow({
       style={({ pressed }) => [
         styles.row,
         {
-          backgroundColor: colors.rowSurface,
-          borderColor: colors.borderSoft,
-          boxShadow: `0 10px 28px ${colors.shadow}`,
+          backgroundColor: colors.card,
+          borderColor: colors.border,
         },
         pressed && styles.pressed,
       ]}
     >
-      <View style={styles.copy}>
-        <Text
-          style={[
-            styles.badge,
-            {
-              backgroundColor: colors.rowBadge,
-              color: colors.rowBadgeText,
-            },
-          ]}
-        >
-          {routeLabel(id)}
-        </Text>
-        <Text selectable style={[styles.title, { color: colors.ink }]}>
-          {title}
-        </Text>
+      <View style={styles.content}>
+        <View style={styles.header}>
+          <View style={[styles.badge, { backgroundColor: colors.accentSoft }]}>
+            <Text style={[styles.badgeText, { color: colors.accentStrong }]}>
+              {routeLabel(id)}
+            </Text>
+          </View>
+          <Text selectable style={[styles.title, { color: colors.ink }]}>
+            {title}
+          </Text>
+        </View>
         {subtitle ? (
           <Text selectable style={[styles.subtitle, { color: colors.inkSoft }]}>
             {subtitle}
           </Text>
         ) : null}
       </View>
-      <View style={styles.trailingGroup}>
-        <Text style={[styles.trailing, { color: colors.teal }]}>{trailingLabel ?? "Open"}</Text>
-        <Text style={[styles.trailingArrow, { color: colors.accentStrong }]}>›</Text>
+      <View style={styles.trailing}>
+        <Text style={[styles.trailingLabel, { color: colors.teal }]}>{trailingLabel ?? "Open"}</Text>
+        <Text style={[styles.arrow, { color: colors.accentStrong }]}>›</Text>
       </View>
     </Pressable>
   );
@@ -65,55 +60,56 @@ export function LinkRow({
 
 const styles = StyleSheet.create({
   row: {
-    alignItems: "flex-start",
-    borderRadius: 26,
+    borderRadius: 8,
     borderWidth: 1,
     flexDirection: "row",
-    gap: spacing.md,
+    alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.lg,
+    padding: spacing.md,
+    gap: spacing.md,
   },
-  pressed: {
-    opacity: 0.9,
-    transform: [{ scale: 0.992 }],
-  },
-  copy: {
+  content: {
     flex: 1,
-    gap: 8,
+    gap: 4,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
   },
   badge: {
-    alignSelf: "flex-start",
-    borderRadius: 999,
-    fontSize: 10,
-    fontWeight: "700",
-    overflow: "hidden",
-    paddingHorizontal: 12,
-    paddingVertical: 4,
+    borderRadius: 4,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  badgeText: {
+    fontSize: 9,
+    fontWeight: "800",
     textTransform: "uppercase",
   },
   title: {
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: "700",
-    lineHeight: 22,
+    flex: 1,
   },
   subtitle: {
     fontSize: 13,
-    lineHeight: 19,
-  },
-  trailingGroup: {
-    alignItems: "center",
-    flexDirection: "row",
-    gap: spacing.xs,
-    paddingTop: 2,
+    lineHeight: 18,
   },
   trailing: {
-    fontSize: 13,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.xs,
+  },
+  trailingLabel: {
+    fontSize: 12,
     fontWeight: "700",
   },
-  trailingArrow: {
-    fontSize: 19,
-    fontWeight: "400",
+  arrow: {
+    fontSize: 18,
     lineHeight: 20,
+  },
+  pressed: {
+    opacity: 0.7,
   },
 });

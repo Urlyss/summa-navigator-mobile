@@ -79,32 +79,32 @@ export function ArticleReader({ article }: { article: Article }) {
         {article.title}
       </Text>
 
-      <View style={styles.tabList}>
-        {tabs.map((tab) => (
-          <Pressable
-            key={tab.key}
-            onPress={() => setActiveTab(tab.key)}
-            style={({ pressed }) => [
-              styles.tab,
-              {
-                backgroundColor: activeTab === tab.key ? colors.accentStrong : colors.cardMuted,
-                borderColor: activeTab === tab.key ? colors.accentStrong : colors.borderSoft,
-              },
-              pressed && styles.pressed,
-            ]}
-          >
-            <Text
-              style={[
-                styles.tabText,
-                {
-                  color: activeTab === tab.key ? "#FFF7EB" : colors.accentStrong,
-                },
+      <View style={[styles.tabList, { borderBottomColor: colors.border, borderBottomWidth: 1 }]}>
+        {tabs.map((tab) => {
+          const active = activeTab === tab.key;
+          return (
+            <Pressable
+              key={tab.key}
+              onPress={() => setActiveTab(tab.key)}
+              style={({ pressed }) => [
+                styles.tab,
+                active && { borderBottomColor: colors.teal, borderBottomWidth: 3 },
+                pressed && styles.pressed,
               ]}
             >
-              {tab.label}
-            </Text>
-          </Pressable>
-        ))}
+              <Text
+                style={[
+                  styles.tabText,
+                  {
+                    color: active ? colors.teal : colors.inkSoft,
+                  },
+                ]}
+              >
+                {tab.label}
+              </Text>
+            </Pressable>
+          );
+        })}
       </View>
 
       <View style={styles.stack}>
@@ -120,11 +120,11 @@ export function ArticleReader({ article }: { article: Article }) {
           styles.contextCard,
           {
             backgroundColor: colors.cardMuted,
-            borderColor: colors.borderSoft,
+            borderColor: colors.border,
           },
         ]}
       >
-        <Text selectable style={[styles.contextLabel, { color: colors.accentStrong }]}>
+        <Text selectable style={[styles.contextLabel, { color: colors.inkFaint }]}>
           Article context
         </Text>
         <Text selectable style={[styles.contextValue, { color: colors.inkSoft }]}>
@@ -138,13 +138,12 @@ export function ArticleReader({ article }: { article: Article }) {
           styles.fab,
           {
             backgroundColor: colors.teal,
-            boxShadow: `0 16px 40px ${colors.shadow}`,
           },
           pressed && styles.pressed,
         ]}
       >
-        <FontAwesome color="#F8FBF9" name="commenting" size={22} />
-        <Text style={styles.fabText}>Ask Thomas AI</Text>
+        <FontAwesome color="#FFFFFF" name="commenting" size={18} />
+        <Text style={styles.fabText}>Ask AI</Text>
       </Pressable>
 
       <ChatbotDrawer article={article} onClose={() => setIsChatOpen(false)} visible={isChatOpen} />
@@ -158,59 +157,56 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "serif",
-    fontSize: 34,
+    fontSize: 28,
     fontWeight: "700",
-    lineHeight: 42,
+    lineHeight: 36,
   },
   tabList: {
     flexDirection: "row",
-    gap: spacing.sm,
-    flexWrap: "wrap",
+    gap: spacing.md,
   },
   tab: {
-    borderRadius: 999,
-    borderWidth: 1,
-    paddingHorizontal: spacing.md,
-    paddingVertical: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 4,
+    marginBottom: -1,
   },
   pressed: {
-    opacity: 0.82,
+    opacity: 0.7,
   },
   tabText: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: "700",
-    letterSpacing: 0.4,
   },
   stack: {
     gap: spacing.xl,
   },
   contextCard: {
-    borderRadius: 24,
+    borderRadius: 8,
     borderWidth: 1,
-    gap: spacing.sm,
-    padding: spacing.lg,
+    gap: 4,
+    padding: spacing.md,
   },
   contextLabel: {
-    fontSize: 11,
-    fontWeight: "700",
-    letterSpacing: 1.6,
+    fontSize: 10,
+    fontWeight: "800",
+    letterSpacing: 1,
     textTransform: "uppercase",
   },
   contextValue: {
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 13,
+    lineHeight: 18,
   },
   fab: {
     alignItems: "center",
     alignSelf: "flex-end",
-    borderRadius: 999,
+    borderRadius: 8,
     flexDirection: "row",
     gap: spacing.sm,
     paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
+    paddingVertical: 12,
   },
   fabText: {
-    color: "#F8FBF9",
+    color: "#FFFFFF",
     fontSize: 14,
     fontWeight: "700",
   },

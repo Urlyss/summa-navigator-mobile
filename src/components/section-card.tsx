@@ -22,16 +22,19 @@ export function SectionCard({
       style={[
         styles.card,
         {
-          backgroundColor: colors.cardElevated,
-          borderColor: colors.borderSoft,
-          boxShadow: `0 18px 48px ${colors.shadow}`,
+          backgroundColor: colors.card,
+          borderColor: colors.border,
         },
         style,
       ]}
       {...props}
     >
-      {eyebrow ? <View style={[styles.rule, { backgroundColor: colors.gold }]} /> : null}
-      {eyebrow ? <Text selectable style={[styles.eyebrow, { color: colors.accent }]}>{eyebrow}</Text> : null}
+      {eyebrow ? (
+        <View style={styles.header}>
+          <View style={[styles.rule, { backgroundColor: colors.gold }]} />
+          <Text selectable style={[styles.eyebrow, { color: colors.accent }]}>{eyebrow}</Text>
+        </View>
+      ) : null}
       {title ? (
         <Text selectable style={[styles.title, { color: colors.ink }]}>
           {title}
@@ -44,26 +47,31 @@ export function SectionCard({
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 30,
+    borderRadius: 12,
     borderWidth: 1,
     gap: spacing.md,
-    padding: spacing.xl,
+    padding: spacing.lg,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
   },
   rule: {
-    borderRadius: 999,
-    height: 4,
-    width: 44,
+    borderRadius: 2,
+    height: 2,
+    width: 24,
   },
   eyebrow: {
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: "700",
-    letterSpacing: 1.8,
+    letterSpacing: 1.2,
     textTransform: "uppercase",
   },
   title: {
     fontFamily: "serif",
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: "700",
-    lineHeight: 34,
+    lineHeight: 30,
   },
 });
